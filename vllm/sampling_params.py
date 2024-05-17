@@ -119,7 +119,7 @@ class SamplingParams:
         stop: Optional[Union[str, List[str]]] = None,
         stop_token_ids: Optional[List[int]] = None,
         include_stop_str_in_output: bool = False,
-        ignore_eos: bool = False,
+        ignore_eos: bool = True,
         max_tokens: Optional[int] = 16,
         min_tokens: int = 0,
         logprobs: Optional[int] = None,
