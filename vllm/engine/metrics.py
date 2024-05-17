@@ -329,22 +329,22 @@ class StatLogger:
             self._log_prometheus_interval(
                 prompt_throughput=prompt_throughput,
                 generation_throughput=generation_throughput)
+            
+            stats_message = (
+                f"Avg prompt throughput: {prompt_throughput:.1f} tokens/s, "
+                f"Avg generation throughput: {generation_throughput:.1f} tokens/s, "
+                f"Running: {stats.num_running_sys} reqs, "
+                f"Swapped: {stats.num_swapped_sys} reqs, "
+                f"Pending: {stats.num_waiting_sys} reqs, "
+                f"GPU KV cache usage: {stats.gpu_cache_usage_sys * 100}%, "
+                f"CPU KV cache usage: {stats.cpu_cache_usage_sys * 100}%"
+            )
+
+            with open(f"/home/ray/default/stats.txt", "a+") as f:
+                f.write(f"{stats_message}\n")
 
             # Log to stdout.
-            logger.info(
-                "Avg prompt throughput: %.1f tokens/s, "
-                "Avg generation throughput: %.1f tokens/s, "
-                "Running: %d reqs, Swapped: %d reqs, "
-                "Pending: %d reqs, GPU KV cache usage: %.1f%%, "
-                "CPU KV cache usage: %.1f%%",
-                prompt_throughput,
-                generation_throughput,
-                stats.num_running_sys,
-                stats.num_swapped_sys,
-                stats.num_waiting_sys,
-                stats.gpu_cache_usage_sys * 100,
-                stats.cpu_cache_usage_sys * 100,
-            )
+            logger.info(stats_message)
 
             # Reset tracked stats for next interval.
             self.num_prompt_tokens = []
