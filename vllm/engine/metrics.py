@@ -209,7 +209,7 @@ class StatLogger:
                  max_model_len: int) -> None:
         # Metadata for logging locally.
         self.last_local_log = time.time()
-        self.local_interval = local_interval
+        self.local_interval = 2
 
         # Tracked stats over current local logging interval.
         self.num_prompt_tokens: List[int] = []
