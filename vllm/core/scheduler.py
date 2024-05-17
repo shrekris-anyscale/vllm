@@ -293,6 +293,8 @@ class Scheduler:
         # Contain decode requests that are swapped out.
         self.swapped: Deque[SequenceGroup] = deque()
 
+        self.num_completed: int = 0
+
         # Time at previous scheduling step
         self.prev_time = 0.0
         # Did we schedule a prompt at previous step?
@@ -336,6 +338,7 @@ class Scheduler:
         if isinstance(request_id, str):
             request_id = (request_id, )
         request_ids = set(request_id)
+        self.num_completed += len(request_ids)
         for state_queue in [self.waiting, self.running, self.swapped]:
             aborted_groups: List[SequenceGroup] = []
             for seq_group in state_queue:

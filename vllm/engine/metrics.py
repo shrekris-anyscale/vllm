@@ -172,6 +172,7 @@ class Stats:
     num_running_sys: int
     num_waiting_sys: int
     num_swapped_sys: int
+    num_completed_sys: int
     #   KV Cache Usage in %
     gpu_cache_usage_sys: float
     cpu_cache_usage_sys: float
@@ -336,11 +337,12 @@ class StatLogger:
                 f"Running: {stats.num_running_sys} reqs, "
                 f"Swapped: {stats.num_swapped_sys} reqs, "
                 f"Pending: {stats.num_waiting_sys} reqs, "
+                f"Completed: {stats.num_completed_sys} reqs, "
                 f"GPU KV cache usage: {stats.gpu_cache_usage_sys * 100}%, "
                 f"CPU KV cache usage: {stats.cpu_cache_usage_sys * 100}%"
             )
 
-            with open(f"/home/ray/default/stats.txt", "a+") as f:
+            with open("/home/ray/default/stats.txt", "a+") as f:
                 f.write(f"{stats_message}\n")
 
             # Log to stdout.
