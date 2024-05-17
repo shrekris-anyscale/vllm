@@ -81,7 +81,9 @@ def init_logger(name: str) -> Logger:
     retrieved in such a way that we can be sure the root vllm logger has
     already been configured."""
 
-    return logging.getLogger(name)
+    return logging.getLogger("ray.serve")
+
+    # return logging.getLogger(name)
 
 
 # The root logger is initialized when the module is imported.
