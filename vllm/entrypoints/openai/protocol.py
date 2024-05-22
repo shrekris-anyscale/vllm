@@ -96,7 +96,7 @@ class ChatCompletionRequest(OpenAIBaseModel):
     repetition_penalty: Optional[float] = 1.0
     length_penalty: Optional[float] = 1.0
     early_stopping: Optional[bool] = False
-    ignore_eos: Optional[bool] = False
+    ignore_eos: Optional[bool] = True
     min_tokens: Optional[int] = 0
     stop_token_ids: Optional[List[int]] = Field(default_factory=list)
     skip_special_tokens: Optional[bool] = True
@@ -248,7 +248,7 @@ class CompletionRequest(OpenAIBaseModel):
     length_penalty: Optional[float] = 1.0
     early_stopping: Optional[bool] = False
     stop_token_ids: Optional[List[int]] = Field(default_factory=list)
-    ignore_eos: Optional[bool] = False
+    ignore_eos: Optional[bool] = True
     min_tokens: Optional[int] = 0
     skip_special_tokens: Optional[bool] = True
     spaces_between_special_tokens: Optional[bool] = True
